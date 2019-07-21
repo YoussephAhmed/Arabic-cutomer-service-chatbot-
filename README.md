@@ -1,2 +1,2 @@
 # Arabic-cutomer-service-chatbot-
-using Rivescript with node.js
+creating API's using Rivescript with node.js and express package 
