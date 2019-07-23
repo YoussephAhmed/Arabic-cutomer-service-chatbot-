@@ -1,5 +1,10 @@
+
 import os.path
 from rivescript import RiveScript
+
+
+
+
 
 
 file = os.path.dirname(__file__)
@@ -14,7 +19,7 @@ bot.sort_replies()
 while True :
     msg = str(input('You> '))
 
-    if msg == 'q':
+    if msg == 'quit':
         break
 
     else:

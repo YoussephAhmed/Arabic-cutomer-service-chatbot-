@@ -1,0 +1,116 @@
+! version = 2.0
+
+// Bot variables 
+! var name = Jumia // chatbot name
+! var age = 17 // chtbot age 
+! array departments = اجهزة | موبايلات | ملابس
+
+
+// weclome
++ السلام عليكم[*]
+- وعليكم السلام و رحمة الله و بركاته... ممكن اسم حضرتك؟ {topic=name}
+
++* الخير
+- <star> الخير... ممكن اسم حضرتك؟ {topic=name}
+
+
++* النور
+- <star> النور... ممكن اسم حضرتك؟ {topic=name}
+
++*
+- اهلا وسهلا... ممكن اسم حضرتك؟ {topic=name}
+
+
+> topic name
+
+  +_ // get matched only when the user entres his first name only 
+  - <set user_name=<star>> اتشرفنا يا <get user_name> ممكن نمرة حضرتك؟ {topic=number}
+  
+  +* // when user say more words
+  - اسم حضرتك الاول؟
+  - Your 'first' name please?
+
+< topic
+
+
+
+> topic number
+
+  +#
+  - <set user_no=<star>> تمام يا  <get user_name> ممكن تقولي استفسار حضرتك عن ايه(الاقسام ولا خدمة العملاء)؟ {topic=problem}
+  
+  +*
+  - رقم موبايلك يا <get user_name>
+  - Your 'mobile number' please?
+
+< topic
+
+
+
+> topic problem
+
+  + [*] الاقسام[*] 
+  - <set user_no=<star>> تمام يا  <get user_name> الاقسام عندنا هي: \n 
+  ^ اجهزة  \n
+  ^ ملابس \n
+  ^ موبايلات \n
+  ^ الاستفسار عن قسم؟
+  
+
+  +(ملابس|اجهزة|موبايلات) 
+  * <star> == ملابس =>  (رجالي ولا حريمي ولا اطفال؟) {topic=clothes}
+  * <star> == اجهزة =>  اسم المنتج اللي حضرتك بتدور عليه؟ {topic=devices}
+  * <star> == موبايلات =>  ايه رينج الاسعار اللي بتدور في يا <get user_name> {topic=mobiles}
+
+
+  +[*]خدمة العملاء[*]
+  - رقم خدمة العملاء اهو يا فندم 01234567899 {topic=end}
+< topic
+
+
+
+> topic clothes 
+  +*
+  - (رجالي ولا حريمي ولا اطفال؟)
+
+  +(رجالي|حريمي|اطفال)
+  - ممكن رقم ال id بتاع المودل اللي عجبك؟ 
+  
+  + *
+  % ممكن رقم ال id بتاع المودل اللي عجبك؟ 
+  - ممكن مقاس المودل اللي عجبك؟ 
+
+  +#
+  -تمام يا <get user_name> هنشوف المنتج متوفر حاليا ولا لأ و نرد عليك... {topic=end}
+
+< topic
+
+
+
+> topic devices
+  + *
+  - تمام يا <get user_name> هنشوف المنتج متوفر حاليا ولا لأ و نرد عليك... {topic=end}
+< topic
+
+
+> topic mobiles 
+  +*
+  - تمام يا <get user_name> هنشوف ايه احسن حاجة موجودة في الرينج ده و نبلغلك علي طول {topic=end}
+< topic
+
+
+
+> topic end
+  + *
+  - نورتنا يا <get user_name> {weight=7}
+  - ازاي اساعد حضرتك؟
+  - ممكن تقولي ايه المشكلة؟
+  - استفسار حضرتك عن؟ 
+  
+   + (الاقسام| خدمة العملاء)
+   -تمام معاك يا فندم {topic= problem}
+< topic
+
+
+
+
