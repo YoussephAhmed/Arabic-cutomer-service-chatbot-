@@ -2,12 +2,12 @@
 
 // Bot variables 
 ! var name = Jumia // chatbot name
-! var age = 17 // chtbot age 
+! var age = 17 // chatbot age 
 ! array departments = اجهزة | موبايلات | ملابس
 
 
 // weclome
-+ السلام عليكم[*]
++السلام عليكم
 - وعليكم السلام و رحمة الله و بركاته... ممكن اسم حضرتك؟ {topic=name}
 
 +* الخير
@@ -36,7 +36,7 @@
 
 > topic number
 
-  +#
+  +# // number only with no spaces 
   - <set user_no=<star>> تمام يا  <get user_name> ممكن تقولي استفسار حضرتك عن ايه(الاقسام ولا خدمة العملاء)؟ {topic=problem}
   
   +*
@@ -48,6 +48,8 @@
 
 
 > topic problem
+  + *
+  - شكرا نورتنا يا فندم {topic=end}
 
   + [*] الاقسام[*] 
   - <set user_no=<star>> تمام يا  <get user_name> الاقسام عندنا هي: \n 
